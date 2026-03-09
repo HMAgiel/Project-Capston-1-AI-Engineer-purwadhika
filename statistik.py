@@ -1,5 +1,5 @@
 import pandas as pd
-from prosses import ambil_data, ambil_numerik
+from prosses import ambil_data, ambil_numerik, cek_input_kolom
 
 #Statistik
 def statistik(pengarah):
@@ -16,17 +16,16 @@ def statistik(pengarah):
         try:
             input_user = int(input("Masukkan angka ingin statistik yang mana (1-3): "))
             while True:
-                    try:
                         if input_user == 1:
                             df_numerik = ambil_numerik(df)
-                            input_angka = int(input("Masukan angka kolom mana yang mau dibuat statistik: "))
+                            input_angka = cek_input_kolom(df_numerik)
                             rata = df_numerik[df_numerik.columns[input_angka-1]].mean()
                             print(f"Nilai rata-rata dari {df_numerik.columns[input_angka-1]} adalah: {rata}")
                             break 
                         
                         elif input_user == 2:
                             df_numerik = ambil_numerik(df)
-                            input_angka = int(input("Masukan angka kolom mana yang mau dibuat statistik: "))
+                            input_angka = cek_input_kolom(df_numerik)
                             med = df_numerik[df_numerik.columns[input_angka-1]].median()
                             print(f"Nilai median dari {df_numerik.columns[input_angka-1]} adalah: {med}")
                             break 
@@ -36,17 +35,17 @@ def statistik(pengarah):
                             df2 = df.drop(columns=['head_name'])
                             for i, kolom in enumerate(df2, 1):
                                 print(f"{i}. {kolom}")
-                            input_angka = int(input("Masukan angka kolom mana yang mau dibuat statistik: "))
+                            input_angka = cek_input_kolom(df2)
                             modus = df2[df2.columns[input_angka-1]].mode()
                             print(f"Nilai modus dari {df2.columns[input_angka-1]} adalah: {modus}")
                             break
-                    except (IndexError, ValueError):
-                        print("Masukan angka sesuai nomor kolom")
-                        continue
+                        else:
+                            raise ValueError
             break
         except (IndexError, ValueError):
             print("Masukkan angka sesuai pilihan (1 - 3)")
             continue 
+        
 
 #memilih sesuai grup agregat
 def pilihan_grup(pengarah):

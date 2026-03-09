@@ -1,6 +1,6 @@
 import mysql.connector
 import pandas as pd
-from prosses import ambil_data
+from prosses import ambil_data, cek_keyword_nama
 
 #Memasukkan data baru        
 def tambah_data(pengarah):
@@ -64,17 +64,17 @@ def hapus_data(pengarah):
     df = ambil_data(1, pengarah)
     mycursor = pengarah.cursor()
     
+    list_nama = cek_keyword_nama(df)
     print("""\n 
           ==========================================
           Berikut adalah nama-nama yang tersedia
           ==========================================""")
-    list_nama = df['head_name']
     for i, kolom in enumerate(list_nama, 1):
         print(f"{i}. {kolom}")
     
     while True:
         input_nama = input("Masukkan nama kepala keluarga: ").strip().title()
-        if input_nama in list_nama.str.strip().values:
+        if input_nama in df['head_name'].str.strip().values:
             query = f"""
             DELETE FROM 
                 households
