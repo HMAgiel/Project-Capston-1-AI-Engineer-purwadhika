@@ -1,0 +1,13 @@
+#Jupyter notebooks
+*.ipynb
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings (optional)
+.vscode/
+
+#file percobaan
+data_kependudukan.sql
+fun.py
