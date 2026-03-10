@@ -1,5 +1,6 @@
 import pandas as pd
-from prosses import ambil_data, ambil_numerik, cek_input_kolom
+from prosses import ambil_data, ambil_numerik
+from cek_input import cek_nama, cek_keyword_nama, cek_input_kolom
 
 #Statistik
 def statistik(pengarah):
@@ -62,16 +63,7 @@ def pilihan_grup(pengarah):
     for i, kolom in enumerate(df_kategori, 1):
         print(f"{i}. {kolom}")
     
-    while True:
-          try:
-                input_kategori = int(input("Masukkan angka kolom yang ingin dijadikan kategori: "))
-                if 1 <= input_kategori <= len(df_kategori.columns):
-                    break
-                else:
-                    print("Masukkan angka sesaui nomor kolom")
-          except ValueError:
-                print("Input harus berupa angka")
-      
+    input_kategori = cek_input_kolom(df_kategori)
     print("""
           =====================================================================
           Berikut adalah kolom yang tersedia untuk di agregasi
@@ -85,15 +77,17 @@ def pilihan_grup(pengarah):
     
     while True:
             try:     
-                input_num = input('Masukkan angka kolom yang ingin diagregasi (tulis "stop" untuk berhenti): ')
-                if input_num.lower() == 'stop':
-                    break
-                elif int(input_num) >=1 and int(input_num) <= len(df_numerik.columns):
-                    pilihan.append(int(input_num))
-                else:
-                    raise ValueError
+                  input_num = input('Masukkan angka kolom yang ingin diagregasi (tulis "stop" untuk berhenti): ')
+                  if input_num.lower() == 'stop':
+                        break
+                  
+                  num = int(input_num)
+                  if int(input_num) >=1 and int(input_num) <= len(df_numerik.columns) and num not in pilihan:
+                        pilihan.append(int(input_num))
+                  else:
+                        raise ValueError
             except ValueError:
-                print("Masukkan angka sesuai nomor kolom")
+                  print("Masukkan angka sesuai nomor kolom dan jangan duplikat")
           
     kolom_terpilih = [numerik_kolom[i-1] for i in pilihan]
     

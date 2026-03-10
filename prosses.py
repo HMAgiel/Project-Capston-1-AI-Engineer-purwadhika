@@ -38,22 +38,3 @@ def ambil_numerik(df):
             print(f"{i}. {kolom}")
         return df_numerik
     
-def cek_input_kolom(tabel):
-    while True:
-        try:
-            input_kolom = int(input("Masukan nomor kolom yang tersedia"))
-            if input_kolom < len(tabel.columns):
-                return input_kolom
-            else:
-                print("Masukkan nomor kolom sesuai dengan yang tersedia")
-        except ValueError:
-            print("input harus berupa angka")
-
-def cek_keyword_nama(tabel):
-    while True:
-        keywords = input("Masukkan keyword nama (dapat berupa huruf pertama atau sebagian nama): ").strip()
-        if tabel['head_name'].str.contains(keywords, case=False, na=False).any():
-            list_nama = tabel[tabel['head_name'].str.strip().str.contains(keywords, case=False, na=False)]
-            return list_nama['head_name']
-        else:
-            print("Nama tidak ditemukan")
