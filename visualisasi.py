@@ -43,6 +43,7 @@ def buat_grafik(pengarah):
                         sns.set_style("whitegrid")
                         sns.displot(df_tanpa_nama, x=kolom, kde=True)
                         plt.title(f"plot histogram data {kolom}")
+                        plt.xticks(rotation=45)
                         plt.show()
                         break
                   
@@ -51,8 +52,9 @@ def buat_grafik(pengarah):
                         kolom = df_tanpa_nama.columns[input_kolom-1]
                         plt.figure(figsize=(10,10))
                         sns.set_style("whitegrid")
-                        sns.boxplot(df_tanpa_nama, x=kolom)
+                        sns.boxplot(x=df_tanpa_nama[kolom])
                         plt.title(f"plot histogram data {kolom}")
+                        plt.xticks(rotation=45)
                         plt.show()
                         break
                   
