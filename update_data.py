@@ -82,7 +82,7 @@ def tambah_data(pengarah):
                 pendidikan = input("Masukkan pendidikan terakhir kepala keluarga: ")
                 pernikahan = input("Masukkan status pernikahan: ")
                 anak = cek_input_angka("Masukkan jumlah anak: ", 'integer')
-                luas = cek_input_angka("Masukkan luar rumah dalam m2: ", 'integer')
+                luas = cek_input_angka("Masukkan luas rumah dalam m2: ", 'integer')
                 pengeluaran = cek_input_angka("Masukkan estimasi pengeluaran bulanan: ", 'integer')
                 
                 #input tabel 2
@@ -110,6 +110,7 @@ def tambah_data(pengarah):
     """
     input_tabel2 = (househodl_id, pekerjaan, pendapatan, keluar, simpanan, hutang)
     mycursor.execute(query_input_tabel2, input_tabel2)
+    print("Berhasil menambahkan data baru dengan nama kepala keluarga: ", nama)
     pengarah.commit()
     mycursor.close()
     
